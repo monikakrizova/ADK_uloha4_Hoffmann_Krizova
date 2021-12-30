@@ -21,6 +21,8 @@ SOURCES += \
     edge.cpp \
     main.cpp \
     qpointfbo.cpp \
+    sortbyx.cpp \
+    sortbyy.cpp \
     widget.cpp
 
 HEADERS += \
@@ -28,6 +30,8 @@ HEADERS += \
     draw.h \
     edge.h \
     qpointfbo.h \
+    sortbyx.h \
+    sortbyy.h \
     types.h \
     widget.h
 

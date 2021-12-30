@@ -27,9 +27,29 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
+      <widget class="QPushButton" name="pushButton_5">
+       <property name="text">
+        <string>Load polygons</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
       <widget class="QPushButton" name="pushButton">
        <property name="text">
-        <string>Swicht A/B</string>
+        <string>Switch A/B</string>
        </property>
       </widget>
      </item>

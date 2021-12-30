@@ -4,6 +4,8 @@
 #include <QWidget>
 #include "types.h"
 #include "edge.h"
+#include "sortbyx.h"
+#include "sortbyy.h"
 
 class Draw : public QWidget
 {
@@ -13,6 +15,8 @@ private:
     TPolygon A, B;
     TEdges res;
     bool addA;
+    double y_max = 0, x_min = 999999999; //pro transformaci
+    double y_min = 999999999, x_max = 0; //pro meritko
 
 public:
     explicit Draw(QWidget *parent = nullptr);
@@ -25,6 +29,7 @@ public:
     void setEdges(TEdges &edg){res = edg;}
     void clear(){res.clear();}
     void clearAll(){A.clear(); B.clear(); res.clear();}
+    void loadData(QString &file_name);
 
 signals:
 

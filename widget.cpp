@@ -1,6 +1,8 @@
 #include "widget.h"
 #include "ui_widget.h"
 #include "algorithms.h"
+#include "draw.h"
+#include <QFileDialog>
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -55,3 +57,12 @@ void Widget::on_pushButton_4_clicked()
     ui->Canvas->clearAll();
     repaint();
 }
+
+void Widget::on_pushButton_5_clicked()
+{
+    //Open text file with dialog
+    QString file_name = QFileDialog::getOpenFileName(this, tr("Open Text file"), "", tr("Text Files (*.txt)"));
+    ui->Canvas->loadData(file_name);
+    repaint();
+}
+
