@@ -15,7 +15,9 @@ void Draw::paintEvent(QPaintEvent *event)
     drawPolygon(B, qp);
 
     //Draw edges
-    qp.setPen(Qt::red);
+    QPen fill_pen(Qt::red, 3);
+    qp.setPen(fill_pen);
+
     for(Edge e:res)
         qp.drawLine(e.getStart(), e.getEnd());
 

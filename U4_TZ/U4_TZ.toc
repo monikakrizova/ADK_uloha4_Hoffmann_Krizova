@@ -1,0 +1,51 @@
+\babel@toc {czech}{}
+\contentsline {section}{\numberline {1}Zadání}{2}%
+\contentsline {section}{\numberline {2}Údaje o bonusových úlohách}{2}%
+\contentsline {section}{\numberline {3}Popis problému}{2}%
+\contentsline {section}{\numberline {4}Popisy algoritmů}{2}%
+\contentsline {section}{\numberline {5}Problematické situace}{2}%
+\contentsline {section}{\numberline {6}Vstupní data}{2}%
+\contentsline {subsection}{\numberline {6.1}Načítání textového souboru}{2}%
+\contentsline {subsection}{\numberline {6.2}Kreslení polygonů}{3}%
+\contentsline {section}{\numberline {7}Výstupní data}{4}%
+\contentsline {section}{\numberline {8}Printscreen vytvořené aplikace}{7}%
+\contentsline {section}{\numberline {9}Dokumentace}{8}%
+\contentsline {subsection}{\numberline {9.1}Hlavičkový soubor Types}{8}%
+\contentsline {paragraph}{TPointLinePosition}{8}%
+\contentsline {paragraph}{TPointPolygonPosition}{8}%
+\contentsline {paragraph}{TBooleanOperation}{9}%
+\contentsline {paragraph}{T2LinesPosition}{9}%
+\contentsline {paragraph}{TPolygon}{9}%
+\contentsline {paragraph}{TEdges}{9}%
+\contentsline {subsection}{\numberline {9.2}Třída Algorithms}{9}%
+\contentsline {paragraph}{TPointLinePosition getPointLinePosition(QPointFBO \&a, QPointFBO \&p1, QPointFBO \&p2);}{10}%
+\contentsline {paragraph}{double get2LinesAngle(QPointFBO \&p1, QPointFBO \&p2, QPointFBO \&p3, QPointFBO \&p4);}{10}%
+\contentsline {paragraph}{TPointPolygonPosition getPositionWinding(QPointFBO \&q, TPolygon \&pol);}{10}%
+\contentsline {paragraph}{std::tuple<QPointFBO,T2LinesPosition> get2LinesIntersection(QPointFBO \&p1, QPointFBO \&p2, QPointFBO \&p3, QPointFBO \&p4);}{11}%
+\contentsline {paragraph}{void updatePolygons(TPolygon \&A, TPolygon \&B);}{11}%
+\contentsline {paragraph}{void processIntersection(QPointFBO \&b, double t, int \&index, TPolygon \&P);}{11}%
+\contentsline {paragraph}{void setEdgePositions(TPolygon \&A, TPolygon \&B);}{11}%
+\contentsline {paragraph}{void selectEdges(TPolygon \&P, TPointPolygonPosition pos, TEdges \&edges);}{11}%
+\contentsline {paragraph}{TEdges createOverlay(TPolygon \&A, TPolygon \&B, TBooleanOperation \&op);}{11}%
+\contentsline {subsection}{\numberline {9.3}Třída Draw}{12}%
+\contentsline {paragraph}{void paintEvent(QPaintEvent *event);}{13}%
+\contentsline {paragraph}{void mousePressEvent(QMouseEvent *event);}{13}%
+\contentsline {paragraph}{void switchSource();}{13}%
+\contentsline {paragraph}{void drawPolygon(TPolygon \&pol, QPainter \&qp);}{13}%
+\contentsline {paragraph}{TPolygon getA();}{13}%
+\contentsline {paragraph}{TPolygon getB();}{13}%
+\contentsline {paragraph}{void setEdges(TEdges \&edg){res = edg;}}{13}%
+\contentsline {paragraph}{void clear();}{13}%
+\contentsline {paragraph}{void clearAll();}{13}%
+\contentsline {paragraph}{void loadData(QString \&file\_name);}{13}%
+\contentsline {subsection}{\numberline {9.4}Třída Edge}{13}%
+\contentsline {subsection}{\numberline {9.5}Třída QPointFBO}{13}%
+\contentsline {subsection}{\numberline {9.6}Třída SortByX}{14}%
+\contentsline {subsection}{\numberline {9.7}Třída SortByY}{14}%
+\contentsline {subsection}{\numberline {9.8}Třída Widget}{14}%
+\contentsline {paragraph}{on\_pushButton\_clicked();}{14}%
+\contentsline {paragraph}{on\_pushButton\_2\_clicked();}{14}%
+\contentsline {paragraph}{on\_pushButton\_3\_clicked();}{14}%
+\contentsline {paragraph}{on\_pushButton\_4\_clicked();}{14}%
+\contentsline {paragraph}{on\_pushButton\_5\_clicked();}{14}%
+\contentsline {section}{\numberline {10}Závěr}{15}%

@@ -1,0 +1,72 @@
+\relax 
+\@nameuse{bbl@beforestart}
+\catcode `"\active 
+\catcode `-\active 
+\babel@aux{czech}{}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Zadání}{2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Údaje o bonusových úlohách}{2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Popis problému}{2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Popisy algoritmů}{2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Problematické situace}{2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Vstupní data}{2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Načítání textového souboru}{2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Špagetový model vstupního souboru bodů\relax }}{3}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:vstup.}{{1}{3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Aplikace po načtení polygonů z textového souboru\relax }}{3}\protected@file@percent }
+\newlabel{fig:vystup_LoadPoints}{{2}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Kreslení polygonů}{3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Aplikace po manuálním nakreslení dvou polygonů\relax }}{4}\protected@file@percent }
+\newlabel{fig:vstup_kresleni}{{3}{4}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Výstupní data}{4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Sjednocení polygonů\relax }}{5}\protected@file@percent }
+\newlabel{fig:vystup_union}{{4}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Průník polygonů\relax }}{5}\protected@file@percent }
+\newlabel{fig:vystup_intersection}{{5}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Rozdíl polygonů A-B\relax }}{6}\protected@file@percent }
+\newlabel{fig:vystup_diffAB}{{6}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Rozdíl polygonů B-A\relax }}{6}\protected@file@percent }
+\newlabel{fig:vystup_diffBA}{{7}{6}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Printscreen vytvořené aplikace}{7}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Úvodní okno aplikace\relax }}{7}\protected@file@percent }
+\newlabel{fig:uvodni_okno}{{8}{7}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Dokumentace}{8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}Hlavičkový soubor Types}{8}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{TPointLinePosition}{8}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{TPointPolygonPosition}{8}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{TBooleanOperation}{9}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{T2LinesPosition}{9}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{TPolygon}{9}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{TEdges}{9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Třída Algorithms}{9}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{TPointLinePosition getPointLinePosition(QPointFBO \&a, QPointFBO \&p1, QPointFBO \&p2);}{10}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{double get2LinesAngle(QPointFBO \&p1, QPointFBO \&p2, QPointFBO \&p3, QPointFBO \&p4);}{10}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{TPointPolygonPosition getPositionWinding(QPointFBO \&q, TPolygon \&pol);}{10}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{std::tuple<QPointFBO,T2LinesPosition> get2LinesIntersection(QPointFBO \&p1, QPointFBO \&p2, QPointFBO \&p3, QPointFBO \&p4);}{11}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{void updatePolygons(TPolygon \&A, TPolygon \&B);}{11}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{void processIntersection(QPointFBO \&b, double t, int \&index, TPolygon \&P);}{11}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{void setEdgePositions(TPolygon \&A, TPolygon \&B);}{11}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{void selectEdges(TPolygon \&P, TPointPolygonPosition pos, TEdges \&edges);}{11}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{TEdges createOverlay(TPolygon \&A, TPolygon \&B, TBooleanOperation \&op);}{11}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.3}Třída Draw}{12}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{void paintEvent(QPaintEvent *event);}{13}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{void mousePressEvent(QMouseEvent *event);}{13}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{void switchSource();}{13}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{void drawPolygon(TPolygon \&pol, QPainter \&qp);}{13}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{TPolygon getA();}{13}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{TPolygon getB();}{13}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{void setEdges(TEdges \&edg){res = edg;}}{13}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{void clear();}{13}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{void clearAll();}{13}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{void loadData(QString \&file\_name);}{13}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.4}Třída Edge}{13}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.5}Třída QPointFBO}{13}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.6}Třída SortByX}{14}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.7}Třída SortByY}{14}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.8}Třída Widget}{14}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{on\_pushButton\_clicked();}{14}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{on\_pushButton\_2\_clicked();}{14}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{on\_pushButton\_3\_clicked();}{14}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{on\_pushButton\_4\_clicked();}{14}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{on\_pushButton\_5\_clicked();}{14}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10}Závěr}{15}\protected@file@percent }

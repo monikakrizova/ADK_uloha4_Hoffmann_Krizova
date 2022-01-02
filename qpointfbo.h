@@ -17,8 +17,6 @@ public:
     double getAlpha(){return alpha;}
     double getBeta(){return beta;}
     TPointPolygonPosition getPosition(){return pos;}
-
-
     void setAlpha(double alpha_){alpha=alpha_;}
     void setBeta(double beta_){beta=beta_;}
     void setPosition(TPointPolygonPosition pos_){pos=pos_;}
