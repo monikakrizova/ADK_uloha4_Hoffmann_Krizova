@@ -10,6 +10,7 @@
 \usepackage{caption}  % Caption
 %\usepackage[amsmath]
 \usepackage{placeins}
+\usepackage{pdfpages}
 
 \begin{document}
 
@@ -92,38 +93,97 @@
 %----------------------------------------------------------------------------------------
 
 \section{Zadání}
+Vytvořte aplikaci, jež bude načítat polygony z připraveného  souboru do grafického uživatelského rozhraní
+a v níž budou implementovány množinové operace - průnik, sjednocení a rozdíly. Celý text zadání je vložen na následující stranu dokumentu. 
+
+	
+
+%---------------------------------------------------------------------
+\includepdf{adkcv4.pdf}
 
 %----------------------------------------------------------------------------------------
 %	BONUSOVÉ ÚLOHY
 %----------------------------------------------------------------------------------------
 
 \section{Údaje o bonusových úlohách}
-
-\begin{itemize}
-	\item 
-	\item 
-	\item 	
-\end{itemize}
+V rámci řešení nebyly vypracovány žádné bonusové úlohy.
 
 %----------------------------------------------------------------------------------------
 %	POPIS PROBLÉMU
 %----------------------------------------------------------------------------------------
 
 \section{Popis problému}
-
+Množinové operace patří mezi základní algoritmy GIS. Existuje několik druhů množinových algoritmů, mezi základní můžeme zařadit sjednocení (\textit{Union}), které vytváří ze dvou množin množinu novou, která obsahuje všechny prvkou obou vstupních množin. Další operací je průnik (\textit{Intersection}), jež vytváří ze vstupních množin takovou množinu, která zahrnuje pouze prvky náležející oběma množinám. Posledními zpracovávanými operacemi jsou rozdíly (\textit{Difference}), neboli operace, které obsahují dle zadání buď všechny prvky z první množiny, ale zároveň žádný prvek z druhé množiny, nebo naopak všechny prvky z druhé množiny, ale žádný z množiny první.
  
 %----------------------------------------------------------------------------------------
 %	POPIS ALGORITMŮ
 %----------------------------------------------------------------------------------------
 
 \section{Popisy algoritmů}
+Algoritmy fungují na tomtéž principu, jediným rozdílem je výběr hran podle požadované operace. Množiny budou pro další popis popsány jako \textit{A} a \textit{B}. 
+Algortimus zahrnuje následující fáze:
+\begin{enumerate}
+	\item Výpočet průsečíků \textit{A, B}, setřídění.
+	\item Update\textit{ A, B}.
+	\item Ohodnocení vrcholů \textit{A, B} dle pozice vůči \textit{B, A}.
+	\item Výběr vrcholů dle ohodnocení. 
+	\item Vytvoření hran.
+	\item Spojení hran do oblastí.
+\end{enumerate}
 
-%----------------------------------------------------------------------------------------
-%	PROBLEMATICKÉ SITUACE
-%----------------------------------------------------------------------------------------
-\section{Problematické situace}
-	
+Pro snadnější práci byl vytvořen nový datový typ \textit{QPointFBO}, jenž obsahuje kromě souřadnic bodu i hodnoty $ \alpha $ a $ \beta $, které poskytují informaci o poloze bodu vůči polygonu.
 
+\subsection{Výpočet průsečíků \textit{A, B}, setřídění}
+Pro výpočet průsečíků byla použita metoda \textit{Line Sweep}. 
+Segmenty polygonu označíme jako $ e_i $ a $ e_j $, průsečíky jako $ b_{ij} $.
+Prlsečíky vypočítáme dle následující rovnice:
+\begin{equation}\label{průsečíky}
+	b_{ij} = p_i + \alpha \overrightarrow{u} = p_j + \beta \overrightarrow{v},
+\end{equation}
+
+kde $ \overrightarrow{u} $ a $ \overrightarrow{v} $ jsou směrové vektory:
+\begin{equation}\label{smerove vektory}
+	\overrightarrow{u} = (x_{i+1} - x_i, y{i+1} - y_i), \overrightarrow{v} = (x_{j+1} - x_j, y{j+1} - y_j)
+\end{equation}
+
+a $ \alpha, \beta $ určují polohu bodu vůči polygonu:
+\begin{equation}\label{alfa, beta}
+	\alpha = \frac{k_1}{k_3}, 	\beta = \frac{k_2}{k_3}, k_1 = v_x w_y - v_y w_x, k_2 = u_x w_y - u_y w_x, k_3 = v_y u_x - v_x u_y
+\end{equation}
+
+Je-li $ k_1 $ = 0, $ k_2 $ = 0 a $ k_3 $ = 0, je $ e_i $ a $ e_j $ kolineární,
+je-li $ k_1 $ = 0 a $ k_2 $ = 0, je $ e_i $ a $ e_j $ rovnoběžné
+$ \alpha $ $ \epsilon $ <0, 1> a $ \beta $ $ \epsilon $ <0, 1> $ \exists $ $ b_{ij} $, jinak mimoběžné.
+
+\subsection{Update\textit{ A, B}}
+S každým nalezeným průsečíkem musí být aktualizována množina \textit{B}. Průsečík $ b_{ij} $ se vkládá mezi body $ p_j $ a $ p_{j+1} $, množina \textit{A} se aktualizuje hromadně až po nalezení všech průsečíků, během procesu hledání se ukládá do mapy \textit{M$ (\alpha) $}
+
+\subsection{Ohodnocení vrcholů \textit{ A, B} dle pozice vůči \textit{B, A}}
+O poloze $ e_i $ = ($ p_i $, $ p_{i+1} $) k B rozhoduje poloha libovolného vnitřního bodu
+$ \overline{p_i} $ = 0.5($ p_i $ + $ p_{i+1} $),
+analogicky pro $ e_j $= ($ q_j $, $ q_{j+1} $) vzhledem k A
+$ \overline{q_j} $ = 0.5($ q_j $ + $ q_{j+1} $).
+Každému $ p_i $  \textit{A} určíme polohu vzhledem k \textit{B}.
+Každému $ q_j $ \textit{B} určíme polohu vzhledem k \textit{A}.
+
+Polohu přímky vůči polygonu ohodnotíme pomocí vlastního datového typu Enum, který zahrnuje hodnoty \textit{Inner, Outer, Boundary}, tedy uvnitř, vně nebo na hranici polygonu.
+
+\subsection{Výběr vrcholů dle ohodnocení}
+Hrany jsou vybírány dle požadované množinové operace.
+ 
+Při výběru \textit{Průniku - Intersection} je nutné míti pro obě množiny hodnota \textit{Outer}.
+
+Pro tvorbu \textit{Sjednocení - Union} se vybírá pro obě množiny hodnota \textit{Outer}.
+
+Pro tvorbu \textit{Rozdílu - Difference B-A} se vybírá pro množinu \textit{A} hodnota \textit{Outer} a pro množinu \textit{B} hodnota \textit{Inner}.
+
+Pro tvorbu \textit{Rozdílu - Difference A-B} se naopak vybírá pro množinu \textit{A} hodnota \textit{Inner} a pro množinu \textit{B} hodnota \textit{Outer}.
+
+\subsection{Vytvoření hran}
+Ze všech hran mezi vrcholy a průsečíky množin se vyberou ty hrany, které mají požadované ohodnocení (dle vlastností výše) a vytvoří se nová množina vytvořená pouze těmito hranami.
+
+
+ 
 
 %----------------------------------------------------------------------------------------
 %	VSTUPNÍ DATA
