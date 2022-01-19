@@ -28,13 +28,29 @@ void Widget::on_pushButton_clicked()
 void Widget::on_pushButton_2_clicked()
 {
     //Get polygons and Boolean operation
-    TPolygon A = ui->Canvas->getA();
-    TPolygon B = ui->Canvas->getB();
+    //TPolygon A = ui->Canvas->getA();
+    //TPolygon B = ui->Canvas->getB();
+    std::vector <TPolygon> pols = ui->Canvas->getPolygons();
     TBooleanOperation op = (TBooleanOperation)ui->comboBox->currentIndex();
 
     //Create overlay of polygons
     Algorithms a;
-    TEdges res = a.createOverlay(A, B, op);
+    int n = pols.size();
+    TEdges res, res_;
+
+    for (int i = 0; i < n-1; i++)
+    {
+        for (int j = 1; j < n; j++)
+        {
+            TPolygon A = pols[i];
+            TPolygon B = pols[j];
+            TEdges res_ = a.createOverlay(A, B, op);
+            for (int k = 0; k < res_.size(); k++)
+            {
+                res.push_back(res_[k]);
+            }
+        }
+    }
 
     //Set result
     ui->Canvas->setEdges(res);

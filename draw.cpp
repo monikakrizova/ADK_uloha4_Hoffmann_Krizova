@@ -11,8 +11,7 @@ void Draw::paintEvent(QPaintEvent *event)
     qp.begin(this);
 
     //Draw polygons
-    drawPolygon(A, qp);
-    drawPolygon(B, qp);
+    drawPolygon(polygons, qp);
 
     //Draw edges
     QPen fill_pen(Qt::red, 3);
@@ -43,30 +42,37 @@ void Draw::mousePressEvent(QMouseEvent *event)
     repaint();
 }
 
-void Draw::drawPolygon(TPolygon &polygon, QPainter &qp)
+void Draw::drawPolygon(std::vector<TPolygon> &polygons, QPainter &qp)
 {
     //Draw polygon on canvas
     int r=4;
     QPolygon pol;
 
-    //Convert polygon to QPolygon
-    for (int i=0; i<polygon.size(); i++)
+    for (int j = 0; j < polygons.size(); j++)
     {
-       qp.drawEllipse(polygon[i].x()-r,polygon[i].y()-r,2*r,2*r);
-       pol.append(QPoint(polygon[i].x(),polygon[i].y()));
+        TPolygon polygon = polygons[j];
+        pol.clear();
+
+        //Convert polygon to QPolygon
+        for (int i=0; i<polygon.size(); i++)
+        {
+           qp.drawEllipse(polygon[i].x()-r,polygon[i].y()-r,2*r,2*r);
+           pol.append(QPoint(polygon[i].x(),polygon[i].y()));
+        }
+
+        //Draw polygon
+        qp.drawPolygon(pol);
     }
 
-    //Draw polygon
-    qp.drawPolygon(pol);
 }
 
 void Draw::loadData(QString &file_name)
 {
     //Load data from the *.txt file
-    int ab = 0;
-    QPolygonF polygon;
-    QPointFBO verticeA;
-    QPointFBO verticeB;
+    TPolygon polygon;
+    std::vector<TPolygon> polygons_;
+
+    QPointFBO vertice;
 
     QFile inputFile(file_name);
     if (inputFile.open(QIODevice::ReadOnly))
@@ -80,24 +86,22 @@ void Draw::loadData(QString &file_name)
             double x = line.split(" ")[2].toDouble();
 
             if (id == 1)
-                ab++;
             {
-                if (ab == 1)
-                {
-                    //Add vertice to the end of the polygon A
-                    verticeA.setX(x);
-                    verticeA.setY(y);
-                    A.push_back(verticeA);
-                    polygon.push_back(QPointF(verticeA.x(),verticeA.y()));
-                }
-                else if (ab == 2)
-                {
-                    //Add vertice to the end of the polygon B
-                    verticeB.setX(x);
-                    verticeB.setY(y);
-                    B.push_back(verticeB);
-                    polygon.push_back(QPointF(verticeB.x(),verticeB.y()));
-                }
+                if (polygon.empty() == false)
+                    polygons_.push_back(polygon);
+                polygon.clear();
+
+                //Add vertice to the end of the QPointF vector
+                vertice.setX(x);
+                vertice.setY(y);
+                polygon.push_back(vertice);
+            }
+            else
+            {
+                //Add vertice to the end of the QPointF vector
+                vertice.setX(x);
+                vertice.setY(y);
+                polygon.push_back(vertice);
             }
 
             //Find max Y and min X to determine origin of local system
@@ -122,6 +126,9 @@ void Draw::loadData(QString &file_name)
             if (xx_ > x_max)
                 x_max = xx_;
         }
+
+        //Save polygon to the vector of QPolygonFs
+        polygons_.push_back(polygon);
     }
 
     //Compute scales to zoom in in canvas
@@ -138,19 +145,17 @@ void Draw::loadData(QString &file_name)
         k = canvas_height/dx;
 
     //Transform coordinates from JTSK to canvas
-    for (int unsigned i = 0; i < A.size(); i++)
+    for (int unsigned i = 0; i < polygons_.size(); i++)
     {
-        double temp = A[i].x();
-        A[i].setX(-k*(A[i].y()-y_max)+11);
-        A[i].setY(k*(temp-x_min)+11);
-    }
+        TPolygon pol = polygons_[i];
+        for (int j = 0; j < pol.size(); j++)
+        {
+            double temp = pol[j].x();
+            pol[j].setX(-k*(pol[j].y()-y_max));
+            pol[j].setY(k*(temp-x_min));
+        }
 
-    for (int unsigned i = 0; i < B.size(); i++)
-    {
-        double temp = B[i].x();
-        B[i].setX(-k*(B[i].y()-y_max)+11);
-        B[i].setY(k*(temp-x_min)+11);
+        polygons.push_back(pol);
     }
     inputFile.close();
 }
-
